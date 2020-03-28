@@ -14,7 +14,7 @@ public class Table {
     // Row and Column of this table
     private int row;
     // elements of 2D Array of this table
-    private boolean[][] table;
+    private int[][] table;
 
 
 
@@ -25,7 +25,7 @@ public class Table {
      */
     public Table() {
         this.row = 8;
-        table = new boolean[8][8];
+        table = new int[8][8];
     }
 
 
@@ -37,15 +37,27 @@ public class Table {
      *
      * @return 2D Array of boolean to check emptiness
      */
-    public boolean[][] getTable() {
+    public int[][] getTable() {
         return table;
     }
 
 
     // Method
 
-    public void fullCell(int x, int y) {
 
-        table[x-1][y-1] = true;
+    /**
+     * This method full a cell in array for future check
+     *
+     * @param color color of disc
+     * @param x x position of this Disc
+     * @param y y position of this Disc
+     */
+    public void fullCell(int color, int x, int y) {
+
+        if(color == 0) {
+            table[x][y] = 1;
+        }else if (color == 1) {
+            table[x][y] = 2;
+        }
     }
 }
