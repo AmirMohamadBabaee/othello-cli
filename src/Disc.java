@@ -55,6 +55,13 @@ public class Disc {
     }
 
 
+    /**
+     * This constructor is for first 4 disk in start of game
+     *
+     * @param color color of disc
+     * @param x x position of Disc
+     * @param y y position of Disc
+     */
     public Disc(int color, int x, int y) {
         setX(x);
         setY(y);
