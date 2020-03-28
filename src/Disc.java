@@ -66,6 +66,7 @@ public class Disc {
         } else {
             System.out.println("Your entered color is not correct!!!");
         }
+        addUnicode();
     }
 
     /**
