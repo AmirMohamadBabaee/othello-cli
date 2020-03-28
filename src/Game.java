@@ -27,7 +27,7 @@ public class Game {
     public Game() {
 
         table = new Table();
-        condition = new Condition(table);
+        condition = new Condition(getTable());
 
         discs = new ArrayList<>();
         Disc disc1 = new Disc(0, 3, 3);
@@ -40,13 +40,43 @@ public class Game {
         discs.add(disc3);
         discs.add(disc4);
 
-        System.out.println(table.draw(discs));
+        System.out.println(getTable().draw());
+    }
+
+
+    // Setter & Getter
+
+
+    /**
+     * getter of Table's object
+     *
+     * @return object of Table class
+     */
+    public Table getTable() {
+        return table;
+    }
+
+
+    /**
+     * getter of Condition's object
+     *
+     * @return object of Condition class
+     */
+    public Condition getCondition() {
+        return condition;
     }
 
 
     // Method
 
 
+    /**
+     * This method convert I C format to an array of two
+     * elements. first element is x and second element is y
+     *
+     * @param input entered (I C) format string in stdin
+     * @return array of two elements, x and y
+     */
     private int[] traslator(String input) {
         int [] res = new int [2];
 
@@ -65,21 +95,34 @@ public class Game {
     }
 
 
-    public void createDisc(String input) {
+    /**
+     * This method add a new disc in game and handle user mistake
+     *
+     * @param input entered (I C) format String
+     * @param color color of disc
+     * @return true if selected place is valid and
+     *         false if selected place is not valid
+     */
+    public boolean createDisc(String input, int color) {
         int[] res = traslator(input);
-        Disc disc = new Disc(0, res[0], res[1], table, condition);
-        discs.add(disc);
 
-        System.out.println(table.draw(new ArrayList<>()));
+        if(condition.checkPlace(color, res[0], res[1])) {
+            Disc disc = new Disc(color, res[0], res[1], getTable(), getCondition());
+            discs.add(disc);
 
-        for (int[] ints : table.getTable()) {
+            System.out.println(getTable().draw());
+            return true;
+        }
+
+        return false;
+        /*for (int[] ints : getTable().getTable()) {
             for (int anInt : ints) {
                 System.out.print(anInt+ " ");
             }
             System.out.println();
         }
 
-        System.out.println(res[0] + " " + res[1]);
+        System.out.println(res[0] + " " + res[1]);*/
     }
 
 }
