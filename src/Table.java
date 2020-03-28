@@ -68,7 +68,7 @@ public class Table {
     }
 
 
-    private boolean isEmpty(int x, int y) {
+    public boolean isEmpty(int x, int y) {
         if(table[x][y] == 0) {
             return true;
         }
