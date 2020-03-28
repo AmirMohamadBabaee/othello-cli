@@ -14,17 +14,17 @@ public class Condition {
     // Fields
 
     // list of disk in this game
-    ArrayList<Disc> discs;
+//    ArrayList<Disc> discs;
     // object of table to check cell condition
-    Table table;
+    private Table table;
     // direction of Change color
-    int [] direct;
+    private int [] direct;
 
 
     // Constructor
 
-    public Condition(ArrayList<Disc> discs, Table table) {
-        this.discs = discs;
+    public Condition(Table table) {
+//        this.discs = discs;
         this.table = table;
     }
 
@@ -36,7 +36,7 @@ public class Condition {
      * @param discs new list of disk
      */
     public void updateDiscs(ArrayList<Disc> discs) {
-        this.discs = discs;
+//        this.discs = discs;
     }
 
 
@@ -192,7 +192,7 @@ public class Condition {
         makeSingleChange(color, x, y, -1, -1, direct[5]); // Left-Up
         makeSingleChange(color, x, y, 0, -1, direct[6]); // Up
         makeSingleChange(color, x, y, 1, -1, direct[7]); // Right-Up
-        
+
     }
 
     private void makeSingleChange(int color, int x, int y, int delX, int delY, int id) {
@@ -236,5 +236,22 @@ public class Condition {
             }
 
         }
+    }
+
+
+    public boolean isEnd(int color) {
+
+        int[][] map = this.table.getTable();
+
+        for(int i=0 ; i<8 ; i++) {
+            for(int j=0 ; j<8 ; j++) {
+                if(map[i][j] == 0) {
+                    if(checkPlace(color, i, j)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }
