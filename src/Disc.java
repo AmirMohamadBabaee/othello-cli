@@ -11,25 +11,68 @@ public class Disc {
 
     // Fields
 
+
     // Color of this Disk
     private int color;
     // X position
     private int x;
     // Y position
     private int y;
+    // unicode of Black Disk and White Disk
+    private String unicode;
+    // object of table
+    private Table table;
+    // object of condition
+    private Condition condition;
 
 
     // Constructor
 
 
-    public Disk(int color, int x, int y) {
-        setColor(color);
+    /**
+     * Constructor of Disc class
+     *
+     * @param color color id of this Disc
+     * @param x x position of Disc
+     * @param y y position of Disc
+     * @param table this is object of Table class
+     * @param condition object of condition class
+     */
+    public Disc(int color, int x, int y, Table table, Condition condition) {
+        this.table = table;
+        this.condition = condition;
+        if(condition.checkPlace(color, x, y)) {
+            table.fullCell(color, x, y);
+            condition.makeChange(color, x, y);
+            setX(x);
+            setY(y);
+            setColor(color);
+            addUnicode();
+        } else {
+            System.out.println("You can not place your disk in entered position!!!");
+        }
+
+    }
+
+
+    /**
+     * This constructor is for first 4 disk in start of game
+     *
+     * @param color color of disc
+     * @param x x position of Disc
+     * @param y y position of Disc
+     */
+    public Disc(int color, int x, int y) {
         setX(x);
         setY(y);
+        setColor(color);
+        addUnicode();
     }
 
 
     // Setter & Getter
+
+
 
     /**
      * getter of color field
@@ -53,6 +96,7 @@ public class Disc {
         } else {
             System.out.println("Your entered color is not correct!!!");
         }
+        addUnicode();
     }
 
     /**
@@ -98,4 +142,33 @@ public class Disc {
             System.out.println("Your entered y position is not correct!!!");
         }
     }
+
+    /**
+     * getter of unicode field
+     *
+     * @return unicode string of this Disk
+     */
+    public String getUnicode() {
+        if(!unicode.isEmpty()) {
+            return unicode;
+        }
+        System.out.println("This Disk has not any unicode");
+        return "";
+    }
+
+
+    // Method
+
+
+    /**
+     * this method add unicode of discs to unicode field
+     */
+    private void addUnicode() {
+        if(this.color == 0) {
+            this.unicode = "\u25CF";
+        } else if(this.color == 1) {
+            this.unicode = "\u25CB";
+        }
+    }
+
 }
