@@ -82,6 +82,13 @@ public class Table {
     }
 
 
+    /**
+     * This method check emptiness of a cell
+     *
+     * @param x x position of cell
+     * @param y y position of cell
+     * @return true if be empty and false if don't be empty
+     */
     public boolean isEmpty(int x, int y) {
         if(table[x][y] == 0) {
             return true;
@@ -90,7 +97,13 @@ public class Table {
     }
 
 
-    public String draw(ArrayList<Disc> discs) {
+    /**
+     * This method build table of game and save it in
+     * a new string and return it.
+     *
+     * @return string table of game
+     */
+    public String draw() {
 
         // unicode of this table
 
@@ -182,6 +195,25 @@ public class Table {
             }
             res += "\n";
         }
+
+        return res;
+    }
+
+    private int[] sumDisc() {
+        int counter0 = 0;
+        int counter1 = 0;
+
+        for (int[] ints : table) {
+            for (int i : ints) {
+                if(i == 1) {
+                    counter0++;
+                }else if(i == 2) {
+                    counter1++;
+                }
+            }
+        }
+
+        int[] res = new int[]{counter0, counter1};
 
         return res;
     }
