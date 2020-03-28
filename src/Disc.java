@@ -20,6 +20,10 @@ public class Disc {
     private int y;
     // unicode of Black Disk and White Disk
     private String unicode;
+    // object of table
+    private Table table;
+    // object of condition
+    private Condition condition;
 
 
     // Constructor
@@ -31,11 +35,30 @@ public class Disc {
      * @param color color id of this Disc
      * @param x x position of Disc
      * @param y y position of Disc
+     * @param table this is object of Table class
+     * @param condition object of condition class
      */
+    public Disc(int color, int x, int y, Table table, Condition condition) {
+        this.table = table;
+        this.condition = condition;
+        if(condition.checkPlace(color, x, y)) {
+            table.fullCell(color, x, y);
+            condition.makeChange(color, x, y);
+            setX(x);
+            setY(y);
+            setColor(color);
+            addUnicode();
+        } else {
+            System.out.println("You can not place your disk in entered position!!!");
+        }
+
+    }
+
+
     public Disc(int color, int x, int y) {
-        setColor(color);
         setX(x);
         setY(y);
+        setColor(color);
         addUnicode();
     }
 
