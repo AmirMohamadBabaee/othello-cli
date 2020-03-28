@@ -28,6 +28,10 @@ public class Table {
     public Table() {
         this.row = 8;
         table = new int[8][8];
+        table[3][3] = 1;
+        table[4][4] = 1;
+        table[3][4] = 2;
+        table[4][3] = 2;
     }
 
 
@@ -37,10 +41,19 @@ public class Table {
     /**
      * getter of 2D Array to check cell is empty or not
      *
-     * @return 2D Array of boolean to check emptiness
+     * @return 2D Array of number to check emptiness
      */
     public int[][] getTable() {
         return table;
+    }
+
+    /**
+     * setter of 2D Array to check cell is empty or not
+     *
+     * @param table 2D Array of number
+     */
+    public void setTable(int[][] table) {
+        this.table = table;
     }
 
 
@@ -56,11 +69,12 @@ public class Table {
      */
     public void fullCell(int color, int x, int y) {
 
-        if (isEmpty(x, y)) {
+        Condition condition = new Condition(this);
+        if (condition.checkPlace(color, x, y)) {
             if(color == 0) {
-                table[x][y] = 1;
-            }else if (color == 1) {
-                table[x][y] = 2;
+                this.table[x][y] = 1;
+            } else if (color == 1) {
+                this.table[x][y] = 2;
             }
         } else {
             System.out.println("This cell is full!\nPlease select other cell!!!");
@@ -79,6 +93,9 @@ public class Table {
     public String draw(ArrayList<Disc> discs) {
 
         // unicode of this table
+
+        String disc1 = "\u25CF";
+        String disc2 = "\u25CB";
 
         String up_left = "\u2554";
         String up_right = "\u2557";
@@ -145,9 +162,21 @@ public class Table {
                     res += horizentalBar+sol+sol+sol+horizentalBar+cross;
                 } else { //check for player disc
                     if (j==1) {
-                        res += verticalBar+" "+sol+sol+sol+" "+verticalBar;
+                        if(table[i/2-1][0] == 0) {
+                            res += verticalBar+" "+sol+sol+sol+" "+verticalBar;
+                        } else if (table[i/2-1][0] == 1) {
+                            res += verticalBar+" "+disc1+" "+verticalBar;
+                        } else if (table[i/2-1][0] == 2) {
+                            res += verticalBar+" "+disc2+" "+verticalBar;
+                        }
                     } else if (j>1) {
-                        res += " "+sol+sol+sol+" "+verticalBar;
+                        if(table[i/2-1][j-1] == 0) {
+                            res += " "+sol+sol+sol+" "+verticalBar;
+                        } else if (table[i/2-1][j-1] == 1) {
+                            res += " "+disc1+" "+verticalBar;
+                        } else if (table[i/2-1][j-1] == 2) {
+                            res += " "+disc2+" "+verticalBar;
+                        }
                     }
                 }
             }
