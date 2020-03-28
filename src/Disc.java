@@ -11,25 +11,38 @@ public class Disc {
 
     // Fields
 
+
     // Color of this Disk
     private int color;
     // X position
     private int x;
     // Y position
     private int y;
+    // unicode of Black Disk and White Disk
+    private String unicode;
 
 
     // Constructor
 
 
-    public Disk(int color, int x, int y) {
+    /**
+     * Constructor of Disc class
+     *
+     * @param color color id of this Disc
+     * @param x x position of Disc
+     * @param y y position of Disc
+     */
+    public Disc(int color, int x, int y) {
         setColor(color);
         setX(x);
         setY(y);
+        addUnicode();
     }
 
 
     // Setter & Getter
+
+
 
     /**
      * getter of color field
@@ -98,4 +111,33 @@ public class Disc {
             System.out.println("Your entered y position is not correct!!!");
         }
     }
+
+    /**
+     * getter of unicode field
+     *
+     * @return unicode string of this Disk
+     */
+    public String getUnicode() {
+        if(!unicode.isEmpty()) {
+            return unicode;
+        }
+        System.out.println("This Disk has not any unicode");
+        return "";
+    }
+
+
+    // Method
+
+
+    /**
+     * this method add unicode of discs to unicode field
+     */
+    private void addUnicode() {
+        if(this.color == 0) {
+            this.unicode = "\u25CF";
+        } else if(this.color == 1) {
+            this.unicode = "\u25CB";
+        }
+    }
+
 }
