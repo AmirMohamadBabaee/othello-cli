@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * this game and check end of game
  *
  * @author Amir01
- * @version v1.0 (27 Mar 2020)
+ * @version v1.0 (28 Mar 2020)
  */
 public class Condition {
 
@@ -179,5 +179,62 @@ public class Condition {
 
         }
         return res;
+    }
+
+
+    public void makeChange(int color, int x, int y) {
+
+        makeSingleChange(color, x, y, 1, 0, direct[0]); // Right
+        makeSingleChange(color, x, y, 1, 1, direct[1]); // Right-Down
+        makeSingleChange(color, x, y, 0, 1, direct[2]); // Down
+        makeSingleChange(color, x, y, -1, 1, direct[3]); // Left-Down
+        makeSingleChange(color, x, y, -1, 0, direct[4]); // Left
+        makeSingleChange(color, x, y, -1, -1, direct[5]); // Left-Up
+        makeSingleChange(color, x, y, 0, -1, direct[6]); // Up
+        makeSingleChange(color, x, y, 1, -1, direct[7]); // Right-Up
+        
+    }
+
+    private void makeSingleChange(int color, int x, int y, int delX, int delY, int id) {
+
+        int [][] map = this.table.getTable();
+
+        if(id == 1) {
+
+            if(color == 0) {
+
+                try{
+
+                    do{
+                        x += delX;
+                        y += delY;
+                        if (map[x][y] == 2) {
+                            map[x][y] = 1;
+                        }
+                    }while(map[x+delX][y+delY] == 2);
+
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
+
+            }else if(color ==1) {
+
+                try{
+
+                    do{
+                        x += delX;
+                        y += delY;
+                        if (map[x][y] == 1) {
+                            map[x][y] = 2;
+                        }
+                    }while(map[x+delX][y+delY] == 1);
+
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+        }
     }
 }
