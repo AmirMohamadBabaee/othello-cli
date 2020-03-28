@@ -196,6 +196,8 @@ public class Table {
             res += "\n";
         }
 
+        res += " Player 1: "+sumDisc()[0]+"\t\t\tPlayer 2: "+sumDisc()[1];
+
         return res;
     }
 
