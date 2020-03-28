@@ -1,4 +1,3 @@
-import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 
 /**
@@ -18,6 +17,8 @@ public class Condition {
     ArrayList<Disc> discs;
     // object of table to check cell condition
     Table table;
+    // direction of Change color
+    int [] direct;
 
 
     // Constructor
@@ -41,17 +42,68 @@ public class Condition {
 
     public boolean checkPlace(int color, int x, int y) {
 
+        direct = new int[8];
         if(table.isEmpty(x,y)){
 
-            return checkSingle(color, x, y, 1, 0) ||
-                    checkSingle(color, x, y, 1, 1) ||
-                    checkSingle(color, x, y, 0, 1) ||
-                    checkSingle(color, x, y, -1, 1) ||
-                    checkSingle(color, x, y, -1, 0) ||
-                    checkSingle(color, x, y, -1, -1) ||
-                    checkSingle(color, x, y, 0, -1) ||
-                    checkSingle(color, x, y, 1, -1) ;
+            boolean b1 = checkSingle(color, x, y, 1, 0); // Right
+            boolean b2 = checkSingle(color, x, y, 1, 1); // Right-Down
+            boolean b3 = checkSingle(color, x, y, 0, 1); // Down
+            boolean b4 = checkSingle(color, x, y, -1, 1); // Left-Down
+            boolean b5 = checkSingle(color, x, y, -1, 0); // Left
+            boolean b6 = checkSingle(color, x, y, -1, -1); // Left-Up
+            boolean b7 = checkSingle(color, x, y, 0, -1); // Up
+            boolean b8 = checkSingle(color, x, y, 1, -1); // Right-Up
 
+            if(b1) {
+                direct[0] = 1;
+            } else {
+                direct[0] = 0;
+            }
+
+            if(b2) {
+                direct[1] = 1;
+            } else {
+                direct[1] = 0;
+            }
+
+            if(b3) {
+                direct[2] = 1;
+            } else {
+                direct[2] = 0;
+            }
+
+            if(b4) {
+                direct[3] = 1;
+            } else {
+                direct[3] = 0;
+            }
+
+            if(b5) {
+                direct[4] = 1;
+            } else {
+                direct[4] = 0;
+            }
+
+            if(b6) {
+                direct[5] = 1;
+            } else {
+                direct[5] = 0;
+            }
+
+            if(b7) {
+                direct[6] = 1;
+            } else {
+                direct[6] = 0;
+            }
+
+            if(b8) {
+                direct[7] = 1;
+            } else {
+                direct[7] = 0;
+            }
+
+            return b1 || b2 || b3 || b4 || b5 ||
+                    b6 || b7 || b8;
         }
         return false;
     }
