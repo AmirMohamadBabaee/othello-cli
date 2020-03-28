@@ -89,7 +89,8 @@ public class Game {
             res[0] = Integer.valueOf(p1)-1;
             res[1] = p2 - 'A';
         }catch(Exception e) {
-            e.printStackTrace();
+            System.out.println("Your entered input is not valid!!!" +
+                    "\nPlease check valid input format then try again!!!");
         }
         return res;
     }
