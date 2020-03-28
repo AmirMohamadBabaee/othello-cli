@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 /**
  * Condition
  *
@@ -13,8 +11,6 @@ public class Condition {
 
     // Fields
 
-    // list of disk in this game
-//    ArrayList<Disc> discs;
     // object of table to check cell condition
     private Table table;
     // direction of Change color
@@ -23,23 +19,27 @@ public class Condition {
 
     // Constructor
 
+    /**
+     * This is constructor of Condition class
+     *
+     * @param table is object of Table class
+     */
     public Condition(Table table) {
-//        this.discs = discs;
+
         this.table = table;
     }
 
     // Method
 
+
     /**
-     * This method update disc's list per move
+     * This method check is selected cell valid or not
      *
-     * @param discs new list of disk
+     * @param color color of disk
+     * @param x x position of cell
+     * @param y y position of cell
+     * @return is this place is valid or not
      */
-    public void updateDiscs(ArrayList<Disc> discs) {
-//        this.discs = discs;
-    }
-
-
     public boolean checkPlace(int color, int x, int y) {
 
         direct = new int[8];
@@ -182,6 +182,13 @@ public class Condition {
     }
 
 
+    /**
+     * This method change all of disc between to special disc
+     *
+     * @param color color of disc
+     * @param x x position of disc
+     * @param y y position of disc
+     */
     public void makeChange(int color, int x, int y) {
 
         makeSingleChange(color, x, y, 1, 0, direct[0]); // Right
@@ -239,6 +246,12 @@ public class Condition {
     }
 
 
+    /**
+     * This method check is there any place for this player or not
+     *
+     * @param color color of disc
+     * @return true if there is and false if there is not
+     */
     public boolean isEnd(int color) {
 
         int[][] map = this.table.getTable();
@@ -247,11 +260,26 @@ public class Condition {
             for(int j=0 ; j<8 ; j++) {
                 if(map[i][j] == 0) {
                     if(checkPlace(color, i, j)) {
-                        return true;
+                        return false;
                     }
                 }
             }
         }
+        return true;
+    }
+
+
+    /**
+     * This method check game ended or not
+     *
+     * @return true if game ended and false if game is running
+     */
+    public boolean completeGame() {
+
+        if(isEnd(0) && isEnd(1)) {
+            return true;
+        }
         return false;
+
     }
 }
