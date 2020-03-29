@@ -49,7 +49,7 @@ public class Disc {
             setColor(color);
             addUnicode();
         } else {
-            System.out.println("You can not place your disk in entered position!!!");
+            System.out.println("You can not place your disc in entered position!!!");
         }
 
     }
