@@ -171,13 +171,21 @@ public class Game {
                 Disc new_disc = new Disc(color, x, y, table, condition);
                 discs.add(new_disc);
 
+                computerTranslate(x, y);
                 System.out.println(getTable().draw());
 
             } catch(Exception e) {
                 System.err.println("Some problem in parsing String to integer!!!");
             }
-
         }
+    }
+
+
+    private void computerTranslate(int x, int y) {
+
+        char character = (char) ('A' + y);
+
+        System.out.println(x+1 +" "+ character);
 
     }
 
