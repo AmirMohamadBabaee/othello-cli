@@ -311,7 +311,13 @@ public class Condition {
     }
 
 
-
+    /**
+     * This method check all of the cell and then choose
+     * one of them which have more disc between yourself
+     * and another disc.
+     *
+     * @return list of the best choice for computer
+     */
     public List<String> checkBetterPlace() {
 
         int [][] map = table.getTable();
@@ -353,7 +359,7 @@ public class Condition {
     }
 
 
-    public void refreshPriority() {
+    private void refreshPriority() {
         for(int i=0 ; i<8 ;i++){
             for(int j=0; j<8 ; j++) {
 
