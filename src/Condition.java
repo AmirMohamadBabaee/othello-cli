@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Condition
  *
@@ -118,6 +121,11 @@ public class Condition {
 
         int [][] map = table.getTable();
 
+        int mainX = x;
+        int mainY = y;
+
+        int max = -1;
+
         if(color == 0) {
 
             try{
@@ -134,7 +142,12 @@ public class Condition {
                         if (counter > 0) {
 
                             if (map[x][y] == 1) {
+
                                 res = true;
+                                if(max < counter) {
+                                    max = counter;
+                                }
+
                             }
                             counter = 0;
                             con = false;
@@ -165,7 +178,12 @@ public class Condition {
                         if (counter > 0) {
 
                             if (map[x][y] == 2) {
+
                                 res = true;
+                                if(max < counter) {
+                                    max = counter;
+                                }
+
                             }
                             counter = 0;
                             con = false;
@@ -179,6 +197,12 @@ public class Condition {
             } catch(Exception e) {
                 res = false;
             }
+
+        }
+
+        if(res && table.isEmpty(mainX, mainY)) {
+
+            priority[mainX][mainY] = max;
 
         }
         return res;
@@ -284,5 +308,64 @@ public class Condition {
         }
         return false;
 
+    }
+
+
+    /**
+     * This method check all of the cell and then choose
+     * one of them which have more disc between yourself
+     * and another disc.
+     *
+     * @return list of the best choice for computer
+     */
+    public List<String> checkBetterPlace() {
+
+        int [][] map = table.getTable();
+        refreshPriority();
+
+        for(int i=0 ; i<8 ; i++) {
+            for(int j=0 ; j<8 ; j++) {
+                checkPlace(1, i, j);
+            }
+        }
+        int maxVal = findMax();
+        List<String> res = new ArrayList<>();
+
+        for (int i=0; i<8 ; i++) {
+            for (int j=0 ; j<8 ; j++) {
+                if(priority[i][j] == maxVal) {
+
+                    res.add(""+i+j);
+
+                }
+            }
+        }
+        return res;
+    }
+
+
+    private int findMax() {
+
+        int max = -1;
+        for (int[] ints : priority) {
+            for (int i : ints) {
+                if(i > max) {
+                    max = i;
+                }
+            }
+        }
+
+        return max;
+    }
+
+
+    private void refreshPriority() {
+        for(int i=0 ; i<8 ;i++){
+            for(int j=0; j<8 ; j++) {
+
+                priority[i][j] = 0;
+
+            }
+        }
     }
 }

@@ -1,5 +1,5 @@
 /**
- * Disk
+ * Disc
  *
  * This class describe a disk in two state
  * White state and Black state
@@ -12,13 +12,13 @@ public class Disc {
     // Fields
 
 
-    // Color of this Disk
+    // Color of this Disc
     private int color;
     // X position
     private int x;
     // Y position
     private int y;
-    // unicode of Black Disk and White Disk
+    // unicode of Black Disc and White Disc
     private String unicode;
     // object of table
     private Table table;
@@ -49,7 +49,7 @@ public class Disc {
             setColor(color);
             addUnicode();
         } else {
-            System.out.println("You can not place your disk in entered position!!!");
+            System.out.println("You can not place your disc in entered position!!!");
         }
 
     }
