@@ -121,6 +121,11 @@ public class Condition {
 
         int [][] map = table.getTable();
 
+        int mainX = x;
+        int mainY = y;
+
+        int max = -1;
+
         if(color == 0) {
 
             try{
@@ -137,8 +142,12 @@ public class Condition {
                         if (counter > 0) {
 
                             if (map[x][y] == 1) {
+
                                 res = true;
-                                priority[x][y] = counter;
+                                if(max < counter) {
+                                    max = counter;
+                                }
+
                             }
                             counter = 0;
                             con = false;
@@ -169,8 +178,12 @@ public class Condition {
                         if (counter > 0) {
 
                             if (map[x][y] == 2) {
+
                                 res = true;
-                                priority[x][y] = counter;
+                                if(max < counter) {
+                                    max = counter;
+                                }
+
                             }
                             counter = 0;
                             con = false;
@@ -184,6 +197,12 @@ public class Condition {
             } catch(Exception e) {
                 res = false;
             }
+
+        }
+
+        if(res && table.isEmpty(mainX, mainY)) {
+
+            priority[mainX][mainY] = max;
 
         }
         return res;
@@ -295,6 +314,14 @@ public class Condition {
 
     public List<String> checkBetterPlace() {
 
+        int [][] map = table.getTable();
+        refreshPriority();
+
+        for(int i=0 ; i<8 ; i++) {
+            for(int j=0 ; j<8 ; j++) {
+                checkPlace(1, i, j);
+            }
+        }
         int maxVal = findMax();
         List<String> res = new ArrayList<>();
 
@@ -323,5 +350,16 @@ public class Condition {
         }
 
         return max;
+    }
+
+
+    public void refreshPriority() {
+        for(int i=0 ; i<8 ;i++){
+            for(int j=0; j<8 ; j++) {
+
+                priority[i][j] = 0;
+
+            }
+        }
     }
 }
