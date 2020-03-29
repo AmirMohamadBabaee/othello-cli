@@ -15,6 +15,8 @@ public class Condition {
     private Table table;
     // direction of Change color
     private int [] direct;
+    // 2D array to check which place is better to choose
+    private int[][] priority;
 
 
     // Constructor
@@ -27,6 +29,7 @@ public class Condition {
     public Condition(Table table) {
 
         this.table = table;
+        this.priority = new int[8][8];
     }
 
     // Method
