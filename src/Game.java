@@ -185,7 +185,7 @@ public class Game {
 
         char character = (char) ('A' + y);
 
-        System.out.println(x+1 +" "+ character);
+        System.out.println("Computer >>> "+(x+1) +" "+ character);
 
     }
 
