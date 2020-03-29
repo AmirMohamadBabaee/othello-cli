@@ -1,5 +1,3 @@
-import com.sun.deploy.resources.ResourceManager;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -131,6 +129,14 @@ public class Game {
     }
 
 
+    /**
+     * This method check valid position and find position
+     * that have the most disc can change. if number of
+     * disc be equal, it will randomly choose one of them
+     * then continue.
+     *
+     * @param color color of disc
+     */
     public void computerDisc(int color) {
 
         List<String> validPlace = condition.checkBetterPlace();
