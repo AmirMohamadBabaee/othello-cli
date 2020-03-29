@@ -1,4 +1,8 @@
+import com.sun.deploy.resources.ResourceManager;
+
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Game
@@ -124,6 +128,57 @@ public class Game {
         }
 
         System.out.println(res[0] + " " + res[1]);*/
+    }
+
+
+    public void computerDisc(int color) {
+
+        List<String> validPlace = condition.checkBetterPlace();
+
+        if(validPlace.size() == 1) {
+
+            int x = -1;
+            int y = -1;
+
+            try{
+
+                x = Integer.valueOf(validPlace.get(0).substring(0, 1));
+                y = Integer.valueOf(validPlace.get(0).substring(1, 2));
+
+                Disc new_disc = new Disc(color, x, y, table, condition);
+                discs.add(new_disc);
+
+                System.out.println(getTable().draw());
+
+            } catch(Exception e) {
+                System.err.println("Some problem in parsing String to integer!!!");
+            }
+
+        } else if(validPlace.size() > 1) {
+
+            int x = -1;
+            int y = -1;
+
+            Random random = new Random();
+
+            int randNum = random.nextInt(validPlace.size());
+
+            try{
+
+                x = Integer.valueOf(validPlace.get(randNum).substring(0, 1));
+                y = Integer.valueOf(validPlace.get(randNum).substring(1, 2));
+
+                Disc new_disc = new Disc(color, x, y, table, condition);
+                discs.add(new_disc);
+
+                System.out.println(getTable().draw());
+
+            } catch(Exception e) {
+                System.err.println("Some problem in parsing String to integer!!!");
+            }
+
+        }
+
     }
 
 }
