@@ -1,5 +1,13 @@
 import java.util.Scanner;
 
+/**
+ * Main
+ *
+ * This Class, use all of the components to run this game
+ *
+ * @author Amir01
+ * @version v1.0 (30 Mar 2020)
+ */
 public class Main {
 
     private static Scanner scan = new Scanner(System.in);
