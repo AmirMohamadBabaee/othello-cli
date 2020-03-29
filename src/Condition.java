@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Condition
  *
@@ -135,6 +138,7 @@ public class Condition {
 
                             if (map[x][y] == 1) {
                                 res = true;
+                                priority[x][y] = counter;
                             }
                             counter = 0;
                             con = false;
@@ -166,6 +170,7 @@ public class Condition {
 
                             if (map[x][y] == 2) {
                                 res = true;
+                                priority[x][y] = counter;
                             }
                             counter = 0;
                             con = false;
@@ -284,5 +289,39 @@ public class Condition {
         }
         return false;
 
+    }
+
+
+
+    public List<String> checkBetterPlace() {
+
+        int maxVal = findMax();
+        List<String> res = new ArrayList<>();
+
+        for (int i=0; i<8 ; i++) {
+            for (int j=0 ; j<8 ; j++) {
+                if(priority[i][j] == maxVal) {
+
+                    res.add(""+i+j);
+
+                }
+            }
+        }
+        return res;
+    }
+
+
+    private int findMax() {
+
+        int max = -1;
+        for (int[] ints : priority) {
+            for (int i : ints) {
+                if(i > max) {
+                    max = i;
+                }
+            }
+        }
+
+        return max;
     }
 }
